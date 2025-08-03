@@ -95,6 +95,35 @@ async function seedDatabase() {
       console.log('Created test user');
     }
 
+    // Create admin user if it doesn't exist
+    const adminEmail = process.env.ADMIN_EMAIL || 'jageshwarsahu910@gmail.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'Jaggu@06';
+    
+    const adminUser = await User.findOne({ email: adminEmail });
+    if (!adminUser) {
+      const hashedPassword = await bcrypt.hash(adminPassword, 12);
+      await User.create({
+        name: 'Admin User',
+        email: adminEmail,
+        password: hashedPassword,
+        role: 'admin',
+        profileCompleted: true,
+        address: {
+          street: 'Admin Address',
+          city: 'Admin City',
+          state: 'Admin State',
+          country: 'India',
+          pincode: '123456',
+        },
+      });
+      console.log('Created admin user');
+    } else if (adminUser.role !== 'admin') {
+      // Update existing user to admin role
+      adminUser.role = 'admin';
+      await adminUser.save();
+      console.log('Updated user to admin role');
+    }
+
     console.log('Database seeded successfully!');
   } catch (error) {
     console.error('Error seeding database:', error);

@@ -127,13 +127,13 @@ export default function SignInPage() {
             </button>
           </div>
 
-          {/* Demo Credentials */}
-          <div className="mt-6 p-4 bg-blue-50 rounded-md">
-            <h3 className="text-sm font-medium text-blue-800 mb-2">Demo Credentials:</h3>
-            <div className="text-xs text-blue-700 space-y-1">
-              <p><strong>Admin:</strong> jageshwarsahu910@gmail.com / Jaggu@06</p>
-              <p><strong>User:</strong> Create a new account or use admin credentials</p>
-            </div>
+          <div className="text-center">
+            <p className="mt-2 text-sm text-gray-600">
+              Don't have an account?{' '}
+              <Link href="/auth/signup" className="font-medium text-blue-600 hover:text-blue-500">
+                Sign up here
+              </Link>
+            </p>
           </div>
         </form>
       </div>
