@@ -1,0 +1,37 @@
+# Environment Variables for Vercel Dashboard
+# Copy and paste these values in your Vercel project settings
+
+## Variable 1: MONGODB_URI
+Key: MONGODB_URI
+Value: mongodb+srv://csy20:YOUR_ACTUAL_PASSWORD@cluster0.vm7ufhd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+Environment: Production
+
+## Variable 2: NEXTAUTH_URL
+Key: NEXTAUTH_URL
+Value: https://sitasonii-6iutu1wlk-csys-projects-68441e72.vercel.app
+Environment: Production
+
+## Variable 3: NEXTAUTH_SECRET
+Key: NEXTAUTH_SECRET
+Value: 8mJc9s6rK3pQwE7tY1uI0oP2nM4xZ5vB8aS1dF6gH9jK2lX
+Environment: Production
+
+## Variable 4: ADMIN_EMAIL
+Key: ADMIN_EMAIL
+Value: jageshwarsahu910@gmail.com
+Environment: Production
+
+## Variable 5: ADMIN_PASSWORD
+Key: ADMIN_PASSWORD
+Value: Jaggu@06
+Environment: Production
+
+## Variable 6: NODE_ENV
+Key: NODE_ENV
+Value: production
+Environment: Production
+
+IMPORTANT NOTES:
+1. Replace YOUR_ACTUAL_PASSWORD with your real MongoDB Atlas password
+2. The NEXTAUTH_SECRET above is a generated secure key
+3. After adding all variables, trigger a new deployment
