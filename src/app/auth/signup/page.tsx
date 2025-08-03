@@ -62,7 +62,8 @@ export default function SignUpPage() {
       } else {
         setError(data.message || 'An error occurred');
       }
-    } catch (error) {
+    } catch (err) {
+      console.error('Sign up error:', err);
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, Star, Users, Shield, Truck } from 'lucide-react';
 
 export default function HomePage() {
@@ -80,7 +79,7 @@ export default function HomePage() {
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">Men's Collection</h3>
+                <h3 className="text-2xl font-bold mb-2">Men&apos;s Collection</h3>
                 <p className="text-gray-200">Stylish and comfortable clothing</p>
               </div>
               <div className="absolute top-4 right-4 bg-white text-gray-900 px-3 py-1 rounded-full text-sm font-semibold">
@@ -95,7 +94,7 @@ export default function HomePage() {
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">Women's Collection</h3>
+                <h3 className="text-2xl font-bold mb-2">Women&apos;s Collection</h3>
                 <p className="text-gray-200">Elegant and trendy fashion</p>
               </div>
               <div className="absolute top-4 right-4 bg-white text-gray-900 px-3 py-1 rounded-full text-sm font-semibold">
@@ -110,7 +109,7 @@ export default function HomePage() {
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">Kids' Collection</h3>
+                <h3 className="text-2xl font-bold mb-2">Kids&apos; Collection</h3>
                 <p className="text-gray-200">Fun and comfortable kids wear</p>
               </div>
               <div className="absolute top-4 right-4 bg-white text-gray-900 px-3 py-1 rounded-full text-sm font-semibold">

@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "tsx scripts/seed.ts",
+    "type-check": "tsc --noEmit",
+    "postbuild": "echo 'Build completed successfully!'"
   },
   "dependencies": {
     "@types/bcryptjs": "^3.0.0",

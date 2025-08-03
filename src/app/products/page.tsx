@@ -17,6 +17,7 @@ interface Product {
   stock: number;
   images: string[];
   rating: number;
+  createdAt?: string;
 }
 
 export default function ProductsPage() {
@@ -43,7 +44,55 @@ export default function ProductsPage() {
   }, [searchParams]);
 
   useEffect(() => {
-    filterProducts();
+    const filterProductsAsync = () => {
+      let filtered = products;
+
+      // Filter by search term
+      if (searchTerm) {
+        filtered = filtered.filter(product =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.description.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+
+      // Filter by category
+      if (selectedCategory && selectedCategory !== 'All') {
+        filtered = filtered.filter(product => product.category === selectedCategory);
+      }
+
+      // Filter by price range
+      filtered = filtered.filter(product => 
+        product.price >= priceRange[0] && product.price <= priceRange[1]
+      );
+
+      // Sort products
+      switch (sortBy) {
+        case 'name':
+          filtered.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case 'price-low':
+          filtered.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-high':
+          filtered.sort((a, b) => b.price - a.price);
+          break;
+        case 'rating':
+          filtered.sort((a, b) => b.rating - a.rating);
+          break;
+        default:
+          // newest first - fallback to name sorting if no createdAt
+          filtered.sort((a, b) => {
+            if (a.createdAt && b.createdAt) {
+              return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+            }
+            return a.name.localeCompare(b.name);
+          });
+      }
+
+      setFilteredProducts(filtered);
+    };
+    
+    filterProductsAsync();
   }, [products, searchTerm, selectedCategory, priceRange, sortBy]);
 
   const fetchProducts = async () => {
@@ -58,44 +107,6 @@ export default function ProductsPage() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const filterProducts = () => {
-    let filtered = [...products];
-
-    // Search filter
-    if (searchTerm) {
-      filtered = filtered.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    // Category filter
-    if (selectedCategory) {
-      filtered = filtered.filter(product => product.category === selectedCategory);
-    }
-
-    // Price range filter
-    filtered = filtered.filter(product => 
-      product.price >= priceRange[0] && product.price <= priceRange[1]
-    );
-
-    // Sort
-    filtered.sort((a, b) => {
-      switch (sortBy) {
-        case 'price-low':
-          return a.price - b.price;
-        case 'price-high':
-          return b.price - a.price;
-        case 'rating':
-          return b.rating - a.rating;
-        default:
-          return a.name.localeCompare(b.name);
-      }
-    });
-
-    setFilteredProducts(filtered);
   };
 
   const addToCart = (product: Product) => {
