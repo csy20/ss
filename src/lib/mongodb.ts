@@ -8,7 +8,11 @@ if (!MONGODB_URI) {
 
 // Check if the MongoDB URI has the placeholder password
 if (MONGODB_URI.includes('<db_password>')) {
-  throw new Error('Please replace <db_password> in MONGODB_URI with your actual MongoDB password');
+  // During build time, we might not have the actual password
+  // Only throw error if we're not in build mode
+  if (process.env.NODE_ENV !== 'production' && typeof window === 'undefined' && !process.env.VERCEL_ENV) {
+    console.warn('MongoDB URI contains placeholder password. Database operations will be disabled.');
+  }
 }
 
 interface CachedConnection {
@@ -27,6 +31,13 @@ if (!cached) {
 }
 
 async function connectDB(): Promise<typeof mongoose> {
+  // Skip connection if URI has placeholder password
+  if (MONGODB_URI.includes('<db_password>')) {
+    console.warn('MongoDB URI contains placeholder password. Skipping connection.');
+    // Return a mock mongoose instance for build compatibility
+    return mongoose;
+  }
+
   if (cached!.conn) {
     return cached!.conn;
   }

@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Save, Settings as SettingsIcon } from 'lucide-react';
+import { ArrowLeft, Save } from 'lucide-react';
 
 export default function AdminSettings() {
   const { data: session, status } = useSession();

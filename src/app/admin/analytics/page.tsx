@@ -12,6 +12,13 @@ interface TopProduct {
   revenue: number;
 }
 
+interface RecentSale {
+  id: string;
+  customerName: string;
+  amount: number;
+  date: string;
+}
+
 export default function AdminAnalytics() {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -20,7 +27,7 @@ export default function AdminAnalytics() {
     totalOrders: 0,
     totalCustomers: 0,
     totalProducts: 6,
-    recentSales: [] as any[],
+    recentSales: [] as RecentSale[],
     topProducts: [] as TopProduct[],
   });
   const [loading, setLoading] = useState(true);
