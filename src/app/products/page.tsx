@@ -243,7 +243,7 @@ function ProductsPageContent() {
                       </p>
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-xl font-bold text-gray-900">
-                          ${product.price}
+                          ₹{product.price}
                         </span>
                         <div className="flex items-center">
                           <Star className="h-4 w-4 text-yellow-400 fill-current" />
@@ -277,7 +277,7 @@ function ProductsPageContent() {
                       </p>
                       <div className="flex items-center justify-between">
                         <span className="text-xl font-bold text-gray-900">
-                          ${product.price}
+                          ₹{product.price}
                         </span>
                         <button
                           onClick={() => addToCart(product)}

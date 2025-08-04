@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
 import connectDB from '@/lib/mongodb';
 import Product from '@/models/Product';
+import { authOptions } from '@/lib/auth';
 
 export async function GET(req: NextRequest) {
   try {
@@ -25,6 +27,33 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(products);
   } catch (error) {
     console.error('Products fetch error:', error);
+    return NextResponse.json(
+      { message: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    
+    if (!session || session.user.role !== 'admin') {
+      return NextResponse.json(
+        { message: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    await connectDB();
+
+    const body = await req.json();
+    const product = new Product(body);
+    await product.save();
+
+    return NextResponse.json(product, { status: 201 });
+  } catch (error) {
+    console.error('Product creation error:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
       { status: 500 }

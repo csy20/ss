@@ -12,7 +12,7 @@ import {
   Plus,
   Eye,
   Edit,
-  DollarSign
+  IndianRupee
 } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -105,9 +105,9 @@ export default function AdminDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Revenue</p>
-                <p className="text-3xl font-bold text-gray-900">${stats.totalRevenue}</p>
+                <p className="text-3xl font-bold text-gray-900">₹{stats.totalRevenue}</p>
               </div>
-              <DollarSign className="h-12 w-12 text-yellow-600" />
+              <IndianRupee className="h-12 w-12 text-yellow-600" />
             </div>
           </div>
         </div>
